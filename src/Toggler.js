@@ -40,29 +40,42 @@ const Slider = styled.span`
         background-size: 30px 30px;
         background-repeat: repeat;
     ` : ''}
-    
+`;
 
-    ::before {
-        position: absolute;
-        content: "";
-        height: 30px;
-        width: 30px;
-        left: 2px;
-        bottom: 2px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        background-color: ${props => props.toggled ? '#FFFFFD' : '#F2DE8A'};
-        border-radius: 50%;
-        ${props => props.toggled ? 'transform: translateX(26px);' : ''}
-        border: 2px solid ${props => props.toggled ? '#E1E3D5' : 'rgb(217, 206, 137)'};
-        box-sizing: border-box;
-    }
+const Planet = styled.span`
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    background-color: ${props => props.toggled ? '#FFFFFD' : '#F2DE8A'};
+    border-radius: 50%;
+    ${props => props.toggled ? 'transform: translateX(26px);' : ''}
+    border: 2px solid ${props => props.toggled ? '#E1E3D5' : 'rgb(217, 206, 137)'};
+    box-sizing: border-box;
+    overflow: hidden;
+`;
+
+const Circle = styled.span`
+transition: opacity 0.2s;
+
+    opacity: ${props => props.toggled ? '100' : '0'};
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
+    border: 2px solid #E1E3D5;
+    border-radius: 50%;
+    background-color: transparent;
+    display: inline-block;
+    position: absolute;
+    top: ${props => props.top}px;
+    left: ${props => props.left}px;
 `;
 
 const Toggler = () => {
     const [toggled, setToggled] = useState(false);
-    const height = 46;
     return (
         <Switch 
             type="checkbox"
@@ -73,7 +86,14 @@ const Toggler = () => {
                 toggled={toggled} 
                 onClick={() => setToggled(!toggled)}
 
-            />
+            >
+                <Planet toggled={toggled}>
+                    <Circle toggled={toggled} size={5} top={3} left={5} />
+                    <Circle toggled={toggled} size={4} top={10} left={20} />
+                    <Circle toggled={toggled} size={6} top={3} left={5} />
+                    <Circle toggled={toggled} size={6} top={20} left={5} />
+                </Planet>
+            </Slider>
         </Switch>
     );
 }
