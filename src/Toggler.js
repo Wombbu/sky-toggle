@@ -4,8 +4,8 @@ import styled, { keyframes } from 'styled-components';
 const ANIM_DURATION = 0.5;
 
 const WIDTH = 120;
-const HEIGHT = 68;
-const BORDER_WIDTH = 6;
+const HEIGHT = WIDTH / 2;
+const BORDER_WIDTH = 0;
 const PLANET_PADDING = 4;
 
 const colors = {
@@ -56,9 +56,13 @@ const Switch = styled.label`
     width: ${WIDTH}px;
     height: ${HEIGHT}px;
     background-color: ${props => props.toggled ? colors.night.sky : colors.day.sky};
-    border: 6px solid ${props => props.toggled ? colors.night.containerBorder : colors.day.containerBorder};
+    border: ${BORDER_WIDTH}px solid ${props => props.toggled ? colors.night.containerBorder : colors.day.containerBorder};
     border-radius: ${HEIGHT / 2 + BORDER_WIDTH}px;
-    transition: all ${ANIM_DURATION}s;
+    transition: border ${ANIM_DURATION}s, background-color ${ANIM_DURATION}s;
+
+    & * {
+        cursor: pointer;
+    }
 `;
 
 const Input = styled.input`
@@ -73,22 +77,20 @@ const Slider = styled.span`
     left: 0;
     right: 0;
     bottom: 0;
-    transition: ${ANIM_DURATION}s;
     border-radius: 50%;
-    cursor: pointer;
 `;
 
 const Planet = styled.span`
     position: absolute;
-    height: ${WIDTH / 2}px;
-    width: ${WIDTH / 2}px;
     left: ${PLANET_PADDING}px;
     bottom: ${PLANET_PADDING}px;
-    transition: ${ANIM_DURATION}s;
+    top: ${PLANET_PADDING}px;
+    width: ${HEIGHT - PLANET_PADDING * 2}px;
     background-color: ${props => props.day ? colors.day.planet.surface : colors.night.planet.surface};
-    border: 6px solid ${props => props.day ? colors.day.planet.border : colors.night.planet.border};
+    border: ${BORDER_WIDTH}px solid ${props => props.day ? colors.day.planet.border : colors.night.planet.border};
     border-radius: 50%;
-    transform: ${props => props.day ? 'none' : `translateX(${WIDTH / 2 - PLANET_PADDING * 2}px)`};
+    transform: ${props => props.day ? 'none' : `translateX(${WIDTH / 2}px)`};
+    transition: ${ANIM_DURATION}s;
     box-sizing: border-box;
     overflow: hidden;
 `;
@@ -125,15 +127,12 @@ const Star = styled(FreelyPositionedRoundElement)`
 
 const Toggler = () => {
     const [toggled, setToggled] = useState(false);
-    const height = 68;
     return (
         <Switch 
             toggled={toggled}
-            height={height}
         >
             <Input type="checkbox" onChange={event => setToggled(event.target.checked)} />
             <Slider 
-                toggled={toggled} 
                 onClick={setToggled}
             >
                 <Planet day={!toggled}>
