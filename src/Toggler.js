@@ -48,6 +48,8 @@ const fadeOutAnimation = keyframes`
 const Switch = styled.label`
     position: relative;
     display: inline-block;
+    min-width: ${p => p.width}px;
+    min-height: ${p => p.height}px;
 
     & * {
         cursor: pointer;
@@ -123,13 +125,17 @@ const Star = styled(FreelyPositionedRoundElement)`
   z-index: 1;
 `;
 
-const Toggler = ({width, height, planetPadding, borderSize}) => {
+const Toggler = ({width, height, planetPadding, borderSize, onToggle}) => {
     const [toggled, setToggled] = useState(false);
 
     const planetDiameter = height - (planetPadding * 2);
     return (
-        <Switch>
-            <Input type="checkbox" onChange={event => setToggled(event.target.checked)} />
+        <Switch height={height + borderSize * 2} width={width + borderSize * 2}>
+            <Input type="checkbox" onChange={event => {
+                    onToggle(event.target.checked)
+                    setToggled(event.target.checked)
+                }}
+            />
             <Sky
                 day={!toggled}
                 onClick={setToggled}
@@ -137,7 +143,7 @@ const Toggler = ({width, height, planetPadding, borderSize}) => {
                 width={width}
                 height={height}
             >
-                <Planet day={!toggled} width={width} height={height} planetPadding={planetPadding} borderSize={borderSize}>
+                <Planet day={!toggled} width={width} height={height} planetPadding={planetPadding} borderWidth={borderSize}>
                     <Crater visible={toggled} diameter={0.11 * planetDiameter} top={0.05 * planetDiameter} left={0.05 * planetDiameter} />
                     <Crater visible={toggled} diameter={0.09 * planetDiameter} top={0.16 * planetDiameter} left={0.32 * planetDiameter} />
                     <Crater visible={toggled} diameter={0.11 * planetDiameter} top={0.05 * planetDiameter} left={0.05 * planetDiameter} />
