@@ -10,7 +10,7 @@ const AppWrapper = styled.div`
 
 const App = () => (
   <AppWrapper>
-    <Toggler />
+    <Toggler width={120} height={68} borderSize={4} planetPadding={4} />
   </AppWrapper>
 );
 

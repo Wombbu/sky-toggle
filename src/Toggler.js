@@ -3,11 +3,6 @@ import styled, { keyframes } from 'styled-components';
 
 const ANIM_DURATION = 0.5;
 
-const WIDTH = 550;
-const HEIGHT = 300;
-const BORDER_WIDTH = 6;
-const PLANET_PADDING = 2;
-
 const colors = {
     day: {
         containerBorder: '#A0B7C4',
@@ -73,23 +68,23 @@ const Sky = styled.span`
     bottom: 0;
     border-radius: 50%;
     background-color: ${props => props.day ? colors.day.sky : colors.night.sky};
-    border: ${BORDER_WIDTH}px solid ${props => props.day ? colors.day.containerBorder : colors.night.containerBorder};
-    border-radius: ${HEIGHT / 2 + BORDER_WIDTH}px;
+    border: ${p => p.borderWidth}px solid ${props => props.day ? colors.day.containerBorder : colors.night.containerBorder};
+    border-radius: ${p => p.height / 2 + p.borderWidth}px;
     transition: border ${ANIM_DURATION}s, background-color ${ANIM_DURATION}s;
-    width: ${WIDTH}px;
-    height: ${HEIGHT}px;
+    width: ${p => p.width}px;
+    height: ${p => p.height}px;
 `;
 
 const Planet = styled.span`
     position: absolute;
-    left: ${PLANET_PADDING}px;
-    bottom: ${PLANET_PADDING}px;
-    top: ${PLANET_PADDING}px;
-    width: ${HEIGHT - PLANET_PADDING * 2}px;
+    left: ${p => p.planetPadding}px;
+    bottom: ${p => p.planetPadding}px;
+    top: ${p => p.planetPadding}px;
+    width: ${p => p.height - p.planetPadding * 2}px;
     background-color: ${props => props.day ? colors.day.planet.surface : colors.night.planet.surface};
-    border: ${BORDER_WIDTH}px solid ${props => props.day ? colors.day.planet.border : colors.night.planet.border};
+    border: ${p => p.borderWidth}px solid ${props => props.day ? colors.day.planet.border : colors.night.planet.border};
     border-radius: 50%;
-    transform: ${props => props.day ? 'none' : `translateX(${WIDTH - PLANET_PADDING * 2 - (HEIGHT - PLANET_PADDING * 2)}px)`};
+    transform: ${props => props.day ? 'none' : `translateX(${props.width - props.planetPadding * 2 - (props.height - props.planetPadding * 2)}px)`};
     transition: all ${ANIM_DURATION}s ;
     box-sizing: border-box;
     overflow: hidden;
@@ -128,30 +123,33 @@ const Star = styled(FreelyPositionedRoundElement)`
   z-index: 1;
 `;
 
-const Toggler = () => {
+const Toggler = ({width, height, planetPadding, borderSize}) => {
     const [toggled, setToggled] = useState(false);
 
-    const planetDiameter = HEIGHT - (PLANET_PADDING * 2);
+    const planetDiameter = height - (planetPadding * 2);
     return (
         <Switch>
             <Input type="checkbox" onChange={event => setToggled(event.target.checked)} />
             <Sky
                 day={!toggled}
                 onClick={setToggled}
+                borderWidth={borderSize}
+                width={width}
+                height={height}
             >
-                <Planet day={!toggled}>
+                <Planet day={!toggled} width={width} height={height} planetPadding={planetPadding} borderSize={borderSize}>
                     <Crater visible={toggled} diameter={0.11 * planetDiameter} top={0.05 * planetDiameter} left={0.05 * planetDiameter} />
                     <Crater visible={toggled} diameter={0.09 * planetDiameter} top={0.16 * planetDiameter} left={0.32 * planetDiameter} />
                     <Crater visible={toggled} diameter={0.11 * planetDiameter} top={0.05 * planetDiameter} left={0.05 * planetDiameter} />
                     <Crater visible={toggled} diameter={0.11 * planetDiameter} top={0.32 * planetDiameter} left={0.05 * planetDiameter} />
                 </Planet>
-            </Sky>
-            <Cloud top={HEIGHT * 0.3} left={WIDTH * 0.25} visible={!toggled} width={WIDTH * 0.35} height={HEIGHT * 0.15} />
-            <Cloud top={HEIGHT * 0.55} left={WIDTH * 0.4} visible={!toggled} width={WIDTH * 0.4} height={HEIGHT * 0.15} />
+                <Cloud top={height * 0.3} left={width * 0.25} visible={!toggled} width={width * 0.35} height={height * 0.15} />
+                <Cloud top={height * 0.55} left={width * 0.4} visible={!toggled} width={width * 0.4} height={height * 0.15} />
 
-            <Star top={HEIGHT * 0.5} left={WIDTH*0.375} visible={toggled} diameter={HEIGHT * 0.08} />
-            <Star top={HEIGHT * 0.3} left={WIDTH * 0.16} visible={toggled} diameter={HEIGHT * 0.04} />
-            <Star top={HEIGHT * 0.5} left={WIDTH * 0.2} visible={toggled} diameter={3} />
+                <Star top={height * 0.5} left={width * 0.375} visible={toggled} diameter={height * 0.08} />
+                <Star top={height * 0.3} left={width * 0.16} visible={toggled} diameter={height * 0.04} />
+                <Star top={height * 0.5} left={width * 0.2} visible={toggled} diameter={height * 0.04} />
+            </Sky>
         </Switch>
     );
 }
