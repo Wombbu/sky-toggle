@@ -16,6 +16,7 @@ const theme = {
   night: {
       containerBorder: '#1B1D1C',
       sky: '#39383d',
+      star: 'white',
 
       planet: {
           border: '#E1E3D5',
