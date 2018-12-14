@@ -1,6 +1,6 @@
 # Sky-toggle
 
-A heavily customizable toggle component with TRANSCENDENTAL sky theme
+A heavily customizable toggle component with 🔥🔥🔥TRANSCENDENTAL🔥🔥🔥 sky theme
 
 [Go check the demo](https://wombbu.github.io/sky-toggle/)
 
