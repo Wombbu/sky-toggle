@@ -64,6 +64,8 @@ const App = () => (
     <SubTitle> Stupid toggle is stupid </SubTitle>
     <ToggleContainer width={60} height={45} borderSize={4} planetPadding={8} />
 
+    <p style={{marginTop: '3.5rem'}}>Made with <span role="img" aria-label="nail polish">💅</span> <a href="https://www.styled-components.com/">styled-components</a>, <span role="img" aria-label="fishing rod">🎣</span> <a href="https://reactjs.org/docs/hooks-intro.html">React-hooks</a> and ❤️ </p>
+
   </AppWrapper>
 );
 
