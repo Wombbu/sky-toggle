@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Toggler from './Toggler';
 
 const Title = styled.h1`
+  margin-top: 0;
   margin-bottom: 0.3rem;
   font-size: 4rem;
 `;
@@ -25,7 +26,7 @@ const AppWrapper = styled.div`
 `;
 
 const ToggleWrapper = styled.div`
-  background-color: ${p => p.toggled ? 'rgb(30,30,30)' : 'rgb(244,244,244)'};
+  background-color: ${p => p.toggled ? 'rgb(80,80,80)' : 'rgb(244,244,244)'};
   transition: background-color 0.5s;
   border-radius: 100px;
   height: 130px;
