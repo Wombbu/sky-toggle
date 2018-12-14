@@ -126,7 +126,7 @@ const App = () => (
       <ToggleContainer width={250} height={45} borderSize={3} planetPadding={2} />
       
 
-      <SubTitle>Random toggle is random 🤔</SubTitle>
+      <SubTitle>Random toggle is random <span role="img" aria-label="thinking face">🤔</span></SubTitle>
       <ThemeProvider theme={uranusTheme}>
         <ToggleContainer width={120} height={68} borderSize={4} planetPadding={8} />
       </ThemeProvider>
