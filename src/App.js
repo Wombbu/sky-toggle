@@ -2,13 +2,24 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Toggler from './Toggler';
 
+const Title = styled.h1`
+  margin-bottom: 0.3rem;
+  font-size: 4rem;
+`;
+
+const SubTitle = styled.h2`
+  margin-top: 7rem;
+`
+
 const AppWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
 
-  ${React.h2} {
+  * {
     font-family: 'Roboto Slab', serif;
   }
 `;
@@ -36,20 +47,23 @@ const ToggleContainer = ({width, height, borderSize, planetPadding}) => {
 
 const App = () => (
   <AppWrapper>
-    <h2> Vanilla toggle is vanilla </h2>
+    <Title> Sky toggle </Title>
+    <a href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </a>
+    <SubTitle> Vanilla toggle is vanilla </SubTitle>
     <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1} />
 
-    <h2> Toggle without borders is toggle without borders </h2>
+    <SubTitle> Sleek toggle is sleek </SubTitle>
     <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3} />
 
-    <h2> Round toggle is round </h2>
+    <SubTitle> Round toggle is round </SubTitle>
     <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3} />
 
-    <h2> Long toggle is loooooong </h2>
+    <SubTitle> Long toggle is loooooong </SubTitle>
     <ToggleContainer width={300} height={45} borderSize={3} planetPadding={2} />
 
-    <h2> Stupid looking toggle is stupid </h2>
+    <SubTitle> Stupid toggle is stupid </SubTitle>
     <ToggleContainer width={60} height={45} borderSize={4} planetPadding={8} />
+
   </AppWrapper>
 );
 
