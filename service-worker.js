@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/sky-toggle/precache-manifest.2f879dbb9df09d6dbe928dc91abcf037.js"
+  "/sky-toggle/precache-manifest.6b54a42a0e486c59c2177f3b47f70ef3.js"
 );
 
 workbox.clientsClaim();
