@@ -1,6 +1,51 @@
 import React, { useState } from 'react';
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, {createGlobalStyle, ThemeProvider} from 'styled-components';
 import Toggler from './Toggler';
+
+const theme = {
+  day: {
+      containerBorder: '#A0B7C4',
+      sky: '#C5D5DE',
+      cloud: 'white',
+
+      planet: {
+          border: '#DBC85E',
+          surface: '#F2DE8A',
+      }
+  },
+  night: {
+      containerBorder: '#1B1D1C',
+      sky: '#39383d',
+
+      planet: {
+          border: '#E1E3D5',
+          surface: '#FFFFFD'
+      }
+  }
+}
+
+const uranusTheme = {
+  day: {
+    containerBorder: '#36962a',
+    sky: '#41b532',
+    cloud: '#b017e8',
+
+    planet: {
+      border: '#931125',
+      surface: '#ef1a45',
+    }
+  },
+  night: {
+    containerBorder: '#931125',
+    sky: '#b017e8',
+    star: 'black',
+
+    planet: {
+      border: '#36962a',
+      surface: '#41b532',
+    }
+  }
+}
 
 const GlobalStyle = createGlobalStyle`
   body { 
@@ -63,27 +108,33 @@ const ToggleContainer = ({width, height, borderSize, planetPadding}) => {
 }
 
 const App = () => (
-  <AppWrapper>
-    <GlobalStyle />
-    <Title> Sky toggle </Title>
-    <Link href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </Link>
-    <SubTitle> Vanilla toggle is vanilla </SubTitle>
-    <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1} />
+  <ThemeProvider theme={theme}>
+    <AppWrapper>
+      <GlobalStyle />
+      <Title> Sky toggle </Title>
+      <Link href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </Link>
+      <SubTitle>Vanilla toggle is vanilla</SubTitle>
+      <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1} />
 
-    <SubTitle> Sleek toggle is sleek </SubTitle>
-    <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3} />
+      <SubTitle>Sleek toggle is sleek</SubTitle>
+      <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3} />
 
-    <SubTitle> Round toggle is round </SubTitle>
-    <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3} />
+      <SubTitle>Round toggle is round</SubTitle>
+      <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3} />
 
-    <SubTitle> Long toggle is loooooong </SubTitle>
-    <ToggleContainer width={250} height={45} borderSize={3} planetPadding={2} />
+      <SubTitle>Long toggle is loooooong</SubTitle>
+      <ToggleContainer width={250} height={45} borderSize={3} planetPadding={2} />
+      
 
-    <SubTitle> Stupid toggle is stupid </SubTitle>
-    <ToggleContainer width={60} height={45} borderSize={4} planetPadding={8} />
+      <SubTitle>Random toggle is random 🤔</SubTitle>
+      <ThemeProvider theme={uranusTheme}>
+        <ToggleContainer width={120} height={68} borderSize={4} planetPadding={8} />
+      </ThemeProvider>
 
-    <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link href="https://www.styled-components.com/">styled-components</Link>, <Link href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
-  </AppWrapper>
+
+      <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link href="https://www.styled-components.com/">styled-components</Link>, <Link href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
+    </AppWrapper>
+  </ThemeProvider>
 );
 
 export default App;

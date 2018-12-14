@@ -3,26 +3,6 @@ import styled, { keyframes } from 'styled-components';
 
 const ANIM_DURATION = 0.5;
 
-const colors = {
-    day: {
-        containerBorder: '#A0B7C4',
-        sky: '#C5D5DE',
-        planet: {
-            border: '#DBC85E',
-            surface: '#F2DE8A',
-        }
-    },
-    night: {
-        containerBorder: '#1B1D1C',
-        sky: '#39383d',
-
-        planet: {
-            border: '#E1E3D5',
-            surface: '#FFFFFD'
-        }
-    }
-}
-
 const fadeInAnimation = keyframes`
   0% {
     transform: translate(20px, -20px);
@@ -56,12 +36,6 @@ const Switch = styled.label`
     }
 `;
 
-const Input = styled.input`
-    opacity: 0;
-    width: 0;
-    height: 0;
-`;
-
 const Sky = styled.span`
     position: absolute;
     top: 0;
@@ -69,12 +43,22 @@ const Sky = styled.span`
     right: 0;
     bottom: 0;
     border-radius: 50%;
-    background-color: ${props => props.day ? colors.day.sky : colors.night.sky};
-    border: ${p => p.borderWidth}px solid ${props => props.day ? colors.day.containerBorder : colors.night.containerBorder};
+    background-color: ${props => props.day ? props.theme.day.sky : props.theme.night.sky};
+    border: ${p => p.borderWidth}px solid ${props => props.day ? props.theme.day.containerBorder : props.theme.night.containerBorder};
     border-radius: ${p => p.height / 2 + p.borderWidth}px;
     transition: border ${ANIM_DURATION}s, background-color ${ANIM_DURATION}s;
     width: ${p => p.width}px;
     height: ${p => p.height}px;
+`;
+
+const Input = styled.input`
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:focus ~ ${Sky} {
+        box-shadow: 0px 0px 5px 1px ${props => props.day ? 'rgb(150, 150, 150)' : 'white'};
+    }
 `;
 
 const Planet = styled.span`
@@ -83,8 +67,8 @@ const Planet = styled.span`
     bottom: ${p => p.planetPadding}px;
     top: ${p => p.planetPadding}px;
     width: ${p => p.height - p.planetPadding * 2}px;
-    background-color: ${props => props.day ? colors.day.planet.surface : colors.night.planet.surface};
-    border: ${p => p.borderWidth}px solid ${props => props.day ? colors.day.planet.border : colors.night.planet.border};
+    background-color: ${props => props.day ? props.theme.day.planet.surface : props.theme.night.planet.surface};
+    border: ${p => p.borderWidth}px solid ${props => props.day ? props.theme.day.planet.border : props.theme.night.planet.border};
     border-radius: 50%;
     transform: ${props => props.day ? 'none' : `translateX(${props.width - props.planetPadding * 2 - (props.height - props.planetPadding * 2)}px)`};
     transition: all ${ANIM_DURATION}s ;
@@ -107,21 +91,21 @@ const FreelyPositionedRoundedElement = styled.span`
 `;
 
 const Cloud = styled(FreelyPositionedRoundedElement)`
-  background-color: white;
+  background-color: ${props => props.theme.day.cloud};
   z-index: 2;
 `;
 
 const FreelyPositionedRoundElement = props => <FreelyPositionedRoundedElement {...props} width={props.diameter} height={props.diameter} />;
 
 const Crater = styled(FreelyPositionedRoundElement)`
-    border: 3px solid ${colors.night.planet.border};
+    border: 3px solid ${props => props.theme.night.planet.border};
     background-color: transparent;
     border-radius: 50%;
     z-index: 2;
 `;
 
 const Star = styled(FreelyPositionedRoundElement)`
-  background-color: white;
+  background-color: ${props => props.theme.night.star};
   z-index: 1;
 `;
 
@@ -135,6 +119,7 @@ const Toggler = ({width, height, planetPadding, borderSize, onToggle}) => {
                     onToggle(event.target.checked)
                     setToggled(event.target.checked)
                 }}
+                day={!toggled}
             />
             <Sky
                 day={!toggled}
