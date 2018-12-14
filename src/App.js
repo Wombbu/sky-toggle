@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
 import Toggler from './Toggler';
 
+const GlobalStyle = createGlobalStyle`
+  body { 
+      margin: 1rem;
+      font-family: 'Roboto Slab', serif;
+      text-align: center;
+  }
+`;
+
 const Title = styled.h1`
-  margin-top: 0;
-  margin-bottom: 0.3rem;
+  margin-top: 4rem;  
   font-size: 4rem;
+  line-height: 4.5rem;
+  margin-bottom: 1rem;
 `;
 
 const SubTitle = styled.h2`
-  margin-top: 7rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
 `
+
+const Link = styled.a`
+  text-decoration: none;
+`;
 
 const AppWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
-
-  * {
-    font-family: 'Roboto Slab', serif;
-  }
 `;
 
 const ToggleWrapper = styled.div`
@@ -30,11 +38,19 @@ const ToggleWrapper = styled.div`
   transition: background-color 0.5s;
   border-radius: 100px;
   height: 130px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
+  margin-left: 2rem;
+  margin-right: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
+
+const BottomText = styled.p`
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+`
 
 const ToggleContainer = ({width, height, borderSize, planetPadding}) => {
   const [toggled, setToggled] = useState(false);
@@ -48,8 +64,9 @@ const ToggleContainer = ({width, height, borderSize, planetPadding}) => {
 
 const App = () => (
   <AppWrapper>
+    <GlobalStyle />
     <Title> Sky toggle </Title>
-    <a href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </a>
+    <Link href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </Link>
     <SubTitle> Vanilla toggle is vanilla </SubTitle>
     <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1} />
 
@@ -60,13 +77,12 @@ const App = () => (
     <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3} />
 
     <SubTitle> Long toggle is loooooong </SubTitle>
-    <ToggleContainer width={300} height={45} borderSize={3} planetPadding={2} />
+    <ToggleContainer width={250} height={45} borderSize={3} planetPadding={2} />
 
     <SubTitle> Stupid toggle is stupid </SubTitle>
     <ToggleContainer width={60} height={45} borderSize={4} planetPadding={8} />
 
-    <p style={{marginTop: '3.5rem'}}>Made with <span role="img" aria-label="nail polish">💅</span> <a href="https://www.styled-components.com/">styled-components</a>, <span role="img" aria-label="fishing rod">🎣</span> <a href="https://reactjs.org/docs/hooks-intro.html">React-hooks</a> and ❤️ </p>
-
+    <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link href="https://www.styled-components.com/">styled-components</Link>, <Link href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
   </AppWrapper>
 );
 
