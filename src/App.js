@@ -50,7 +50,6 @@ const uranusTheme = {
 
 const GlobalStyle = createGlobalStyle`
   body { 
-      margin: 1rem;
       font-family: 'Roboto Slab', serif;
       text-align: center;
   }
@@ -72,6 +71,15 @@ const Link = styled.a`
   text-decoration: none;
 `;
 
+const DarkLink = styled(Link)`
+  color: rgb(105,165,216);
+
+  &:visited {
+    color: rgb(110,160,90);
+
+  }
+`;
+
 const AppWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -81,29 +89,42 @@ const AppWrapper = styled.div`
 
 const ToggleWrapper = styled.div`
   background-color: ${p => p.toggled ? 'rgb(80,80,80)' : 'rgb(244,244,244)'};
-  transition: background-color 0.5s;
-  border-radius: 100px;
-  height: 130px;
-  width: 100%;
+  transition: all 0.5s;
+  border-radius: ${props => props.toggled ? 10 : 50}px;
   max-width: 400px;
   margin-left: 2rem;
   margin-right: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
 `;
 
 const BottomText = styled.p`
   margin-top: 3rem;
   margin-bottom: 2rem;
-`
+`;
 
-const ToggleContainer = ({width, height, borderSize, planetPadding}) => {
+const SeoText = styled.div`
+  height: ${props => props.toggled ? 80 : 0}px;
+  opacity: ${props => props.toggled ? 1 : 0};
+  transition: all 0.5s;
+  overflow: hidden;
+  margin-top: ${props => props.toggled ? 1 : 0}rem;
+
+  & > p {
+    color: rgba(222,222,222);
+  }
+`;
+
+const ToggleContainer = ({width, height, borderSize, planetPadding, children}) => {
   const [toggled, setToggled] = useState(false);
 
   return (
     <ToggleWrapper toggled={toggled}>
       <Toggler width={width} height={height} borderSize={borderSize} planetPadding={planetPadding} onToggle={setToggled} />
+      <SeoText toggled={toggled} > {children} </SeoText>
     </ToggleWrapper>
   );
 }
@@ -115,23 +136,31 @@ const App = () => (
       <Title> Sky toggle </Title>
       <Link href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </Link>
       <SubTitle>Vanilla toggle is vanilla</SubTitle>
-      <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1} />
+      <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1}>
+        <p> Sky toggle is a heavily customizable slide toggle React component.</p>
+      </ToggleContainer>
 
       <SubTitle>Sleek toggle is sleek</SubTitle>
-      <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3} />
+      <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3}>
+        <p>The project is not production ready <br/> PR:s are welcome tho 😊 </p>
+      </ToggleContainer>
 
       <SubTitle>Round toggle is round</SubTitle>
-      <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3} />
+      <ToggleContainer width={80} height={80} borderSize={0} planetPadding={3}>
+       <p>This is just a project I made to fulfill my tinkering needs.</p>
+      </ToggleContainer>
 
       <SubTitle>Long toggle is loooooong</SubTitle>
-      <ToggleContainer width={250} height={45} borderSize={3} planetPadding={2} />
+      <ToggleContainer width={200} height={45} borderSize={3} planetPadding={2}>
+        <p>Who me?<br/>I'm Lauri. Nice to meet you.</p>
+      </ToggleContainer>
       
-
       <SubTitle>Random toggle is random <span role="img" aria-label="thinking face">🤔</span></SubTitle>
       <ThemeProvider theme={uranusTheme}>
-        <ToggleContainer width={120} height={68} borderSize={4} planetPadding={8} />
+        <ToggleContainer width={120} height={68} borderSize={4} planetPadding={8}>
+          <p>You can reach me from <DarkLink href="https://twitter.com/Wombbu" >Twitter</DarkLink> and <DarkLink href="https://github.com/Wombbu" >GitHub</DarkLink></p>
+        </ToggleContainer>
       </ThemeProvider>
-
 
       <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link href="https://www.styled-components.com/">styled-components</Link>, <Link href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
     </AppWrapper>
