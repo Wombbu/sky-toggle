@@ -46,7 +46,7 @@ const Sky = styled.span`
     background-color: ${props => props.day ? props.theme.day.sky : props.theme.night.sky};
     border: ${p => p.borderWidth}px solid ${props => props.day ? props.theme.day.containerBorder : props.theme.night.containerBorder};
     border-radius: ${p => p.height / 2 + p.borderWidth}px;
-    transition: border ${ANIM_DURATION}s, background-color ${ANIM_DURATION}s;
+    transition: all ${ANIM_DURATION}s;
     width: ${p => p.width}px;
     height: ${p => p.height}px;
 `;
