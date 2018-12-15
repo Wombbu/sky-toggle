@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "/sky-toggle/static/js/1.9417bf95.chunk.js"
   },
   {
-    "revision": "5e4e6104d3e5926267e7a972ba395132",
+    "revision": "ef74d62e281777c85a3b89e9f49c2e53",
     "url": "/sky-toggle/index.html"
   }
 ];
