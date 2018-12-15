@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/sky-toggle/static/js/runtime~main.bee046e4.js"
   },
   {
-    "revision": "e11f433dac9f6af191c5",
-    "url": "/sky-toggle/static/js/main.e11f433d.chunk.js"
+    "revision": "2348ebed77ec89a96003",
+    "url": "/sky-toggle/static/js/main.2348ebed.chunk.js"
   },
   {
     "revision": "9417bf958e97db6c5a21",
     "url": "/sky-toggle/static/js/1.9417bf95.chunk.js"
   },
   {
-    "revision": "6e42b3c97142294220a618c145f99aad",
+    "revision": "dd2ff70e11b41241fa19844eeb99915e",
     "url": "/sky-toggle/index.html"
   }
 ];
