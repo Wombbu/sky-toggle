@@ -103,18 +103,22 @@ const ToggleWrapper = styled.div`
 
 const BottomText = styled.p`
   margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const SeoText = styled.div`
   height: ${props => props.toggled ? 80 : 0}px;
   opacity: ${props => props.toggled ? 1 : 0};
   transition: all 0.5s;
-  overflow: hidden;
-  margin-top: ${props => props.toggled ? 1 : 0}rem;
+  margin-top: ${props => props.toggled ? 1.5 : 0}rem;
+  display: flex;
+  align-items: center;
 
   & > p {
     color: rgba(222,222,222);
+    margin: 0;
+    padding: 0;
+    ${props => props.toggled ? '' : 'pointer-events: none;'}
   }
 `;
 
@@ -134,7 +138,7 @@ const App = () => (
     <AppWrapper>
       <GlobalStyle />
       <Title> Sky toggle </Title>
-      <Link href="https://github.com/Wombbu/sky-toggle"> Go check the project on GitHub </Link>
+      <Link target="_blank" rel="noopener noreferrer" href="https://github.com/Wombbu/sky-toggle"> Check the project on GitHub </Link>
       <SubTitle>Vanilla toggle is vanilla</SubTitle>
       <ToggleContainer width={80} height={45} borderSize={3} planetPadding={1}>
         <p> Sky toggle is a heavily customizable slide toggle React component.</p>
@@ -142,7 +146,7 @@ const App = () => (
 
       <SubTitle>Sleek toggle is sleek</SubTitle>
       <ToggleContainer width={80} height={45} borderSize={0} planetPadding={3}>
-        <p>The project is not production ready <br/> PR:s are welcome tho 😊 </p>
+        <p>The project is not production ready. <br/> PR:s are welcome tho 😊 </p>
       </ToggleContainer>
 
       <SubTitle>Round toggle is round</SubTitle>
@@ -158,11 +162,11 @@ const App = () => (
       <SubTitle>Random toggle is random <span role="img" aria-label="thinking face">🤔</span></SubTitle>
       <ThemeProvider theme={uranusTheme}>
         <ToggleContainer width={120} height={68} borderSize={4} planetPadding={8}>
-          <p>You can reach me from <DarkLink href="https://twitter.com/Wombbu" >Twitter</DarkLink> and <DarkLink href="https://github.com/Wombbu" >GitHub</DarkLink></p>
+          <p>You can reach me from <DarkLink target="_blank" rel="noopener noreferrer" href="https://twitter.com/Wombbu" >Twitter</DarkLink> and <DarkLink target="_blank" rel="noopener noreferrer" href="https://github.com/Wombbu" >GitHub</DarkLink></p>
         </ToggleContainer>
       </ThemeProvider>
 
-      <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link href="https://www.styled-components.com/">styled-components</Link>, <Link href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
+      <BottomText>Made with  <span role="img" aria-label="nail polish">💅</span><Link target="_blank" rel="noopener noreferrer" href="https://www.styled-components.com/">styled-components</Link>, <Link target="_blank" rel="noopener noreferrer" href="https://reactjs.org/docs/hooks-intro.html">React-hooks</Link> and ❤️ </BottomText>
     </AppWrapper>
   </ThemeProvider>
 );
