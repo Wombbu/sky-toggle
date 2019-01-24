@@ -127,7 +127,7 @@ const ToggleContainer = ({width, height, borderSize, planetPadding, children}) =
 
   return (
     <ToggleWrapper toggled={toggled}>
-      <Toggler width={width} height={height} borderSize={borderSize} planetPadding={planetPadding} onToggle={setToggled} />
+      <Toggler width={width} height={height} borderSize={borderSize} planetPadding={planetPadding} onToggle={toggled => setTimeout(() => setToggled(toggled), 500)} />
       <SeoText toggled={toggled} > {children} </SeoText>
     </ToggleWrapper>
   );
